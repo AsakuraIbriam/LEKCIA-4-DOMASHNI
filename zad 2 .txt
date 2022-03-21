@@ -1,0 +1,75 @@
+#include "stdio.h"
+#include "stdint.h"
+
+
+int main(void) {
+    uint32_t attendance = 0;
+    int option = 0;
+    int bit = 0;
+    while (1) {
+        printf("1. Set attendance\n");
+        printf("2. Clear attendance\n");
+        printf("3. Attendance info\n");
+        printf("4. Change attendance\n");
+        printf("5. Exit\n");
+        scanf("%d", &option);
+        if (!(1 <= option && option <= 5)) {
+            fprintf(stderr, "Invalid option\n");
+            return 1;
+        }
+        if (option == 1)
+        {
+            printf("Which students attendance to be set: ");
+            scanf("%d", &bit);
+              if (!(1 <= bit && bit <= 32)) {
+            fprintf(stderr, "Invalid student number\n");
+            return 1;
+        }
+            printf("\n");
+             attendance = attendance | (1 << bit);
+        }
+        else if (option == 2)  {
+                 printf("Which students attendance to be cleared: ");
+                scanf("%d", &bit);
+                   if (!(1 <= bit && bit <= 32)) {
+            fprintf(stderr, "Invalid student number\n");
+            return 1;
+        }
+
+                printf("\n");
+            attendance = attendance &~ (1<< bit);
+        }  else if (option == 3) {
+              printf("Info for certain student: ");
+              printf("\n");
+            scanf("%d", &bit);
+               if (!(1 <= bit && bit <= 32)) {
+            fprintf(stderr, "Invalid student number\n");
+            return 1;
+        }
+
+
+           if (!!(attendance &(1 << bit))) {
+                printf("Student %d is present", bit);
+                printf("\n");
+               } else {
+                    printf("Student %d is absent", bit);
+                    printf("\n");
+               }
+        }  else if(option == 4) {
+             printf("Which students attendance to be changed: ");
+            scanf("%d", &bit);
+               if (!(1 <= bit && bit <= 32)) {
+            fprintf(stderr, "Invalid student number\n");
+            return 1;
+        }
+
+            printf("\n");
+            attendance = attendance ^(1 << bit);
+        } else if(option == 5) {
+         exit(0);
+        }
+    }
+
+    return 0;
+}
+
